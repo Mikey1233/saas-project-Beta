@@ -1,23 +1,44 @@
+import { getServerSession } from "next-auth";
 import { DarkModeToggle } from "./DarkModeToggle";
 import { Logo } from "./Logo";
 import { UserButton } from "./UserButton";
+import { authOptions } from "@/auth";
+import Link from "next/link";
+import { MessageSquareIcon } from "lucide-react";
+import CreateChatButton from "./CreateChatButton";
 
-export function Header() {
+async function Header() {
+  const session = await getServerSession(authOptions);
   return (
     <header className="sticky top-0 z-50 bg-white dark:bg-gray-900">
-      <nav className="flex flex-col sm:flex-row items-center p-5 pl-2 bg-white dark:bg-gray-900 max-w-7xl mx-auto">
+      <nav className="flex sm:justify-between flex-col sm:flex-row items-center p-4 gap-0.5 bg-white dark:bg-gray-900 max-w-7xl mx-auto">
         <Logo />
 
-        <div className="flex-1 flex items-center justify-end space-x-4">
+        <div className=" flex items-center justify-end space-x-4 ">
           {/* LanguageSelect */}
+
+          {session ? (
+            <>
+              <Link href={"/chat"} prefetch={false}>
+                <MessageSquareIcon className="text-black dark:text-white" />
+              </Link>
+            </>
+          ) : (
+            <Link
+              href={"/pricing"}
+              className="transition ease-in-out text-black dark:text-white bg-indigo-600 py-2 px-3 rounded hover:-translate-y-1 hover:scale-100  duration-300"
+            >
+              <span>pricing</span>
+            </Link>
+          )}
 
           {/* Session && (
 
           ) */}
 
           <DarkModeToggle />
-
-          <UserButton />
+          <CreateChatButton />
+          <UserButton session={session} />
         </div>
       </nav>
 
@@ -25,3 +46,4 @@ export function Header() {
     </header>
   );
 }
+export default Header;

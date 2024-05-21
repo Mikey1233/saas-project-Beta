@@ -4,8 +4,8 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 
 interface UserAvatarProps {
-  name: string;
-  image: string;
+  name?: string | null;
+  image?: string | null;
   className?: string;
 }
 
@@ -15,7 +15,7 @@ export function UserAvatar({ name, image, className }: UserAvatarProps) {
       {image && (
         <Image
           src={image}
-          alt={name}
+          alt={name || 'user name'}
           width={40}
           height={40}
           className="rounded-full"
