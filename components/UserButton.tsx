@@ -14,8 +14,6 @@ import { signIn, signOut } from "next-auth/react";
 
 export function UserButton({session}: {session : Session | null}) {
   //subcription listener...
-  
-console.log(session)
   // Session...
 if (!session) {
   return (
