@@ -18,7 +18,7 @@ const tiers = [
   },
   {
     name: "Pro",
-    id: "s1_485094jruhiti",
+    id: "pro",
     href: "#",
     priceMonthly: "$5.99",
     description: "Get Chatting right away with anyone, anywhere!",
@@ -44,9 +44,10 @@ const ListItems = ({ feature }: { feature: String }) => {
         className="h-6 w-5 flex-none text-indigo-600"
       >
         <path
-          fill-rule="evenodd"
+          fillRule="evenodd"
           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-          clip-rule="evenodd"
+          clipRule="evenodd"
+        
         ></path>
       </svg>
       {feature}
@@ -59,7 +60,7 @@ function PricingCard({ redirect }: { redirect: boolean }) {
       {tiers.map((arr) => (
         <div
           key={arr.id}
-          className="flex flex-col justify-between rounded-3xl bg-white p-8 shadow-xl ring-1 ring-gray-900/10 sm:p-10"
+          className="flex flex-col justify-between rounded-3xl bg-white p-8  ring-1 ring-gray-900/10 sm:p-10"
         >
           <div>
             <h3
@@ -81,13 +82,13 @@ function PricingCard({ redirect }: { redirect: boolean }) {
               className="mt-10 space-y-4 text-sm leading-6 text-gray-600"
             >
               {arr.features.map((text) => (
-                <ListItems feature={text} />
+                <ListItems feature={text} key={text}/>
               ))}
             </ul>
           </div>
           {redirect ? (
             <Link
-              className="mt-8 block rounded-md bg-indigo-600 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer disabled:opacity-80"
+              className="mt-8 block rounded-md bg-indigo-600 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white  hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer disabled:opacity-80"
               href="/register"
             >
               Get started today
