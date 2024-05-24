@@ -7,6 +7,7 @@ import ClientProviders from "@/components/ClientProviders";
 
 import "./globals.css";
 import FirebaseAuthProvider from "./FirebaseAuthProvider";
+import SubscriptionProvider from "@/SubscriptionProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,20 +24,20 @@ export default function RootLayout({
     <ClientProviders>
       <html lang="en">
         <body className="flex flex-col min-h-screen">
-        <FirebaseAuthProvider>
-        <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <Header />
+          <FirebaseAuthProvider>
+            <SubscriptionProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                <Header />
 
-              {children}
-            </ThemeProvider>
-        </FirebaseAuthProvider>
-           
-          
+                {children}
+              </ThemeProvider>
+            </SubscriptionProvider>
+          </FirebaseAuthProvider>
         </body>
       </html>
     </ClientProviders>
