@@ -8,6 +8,7 @@ import ClientProviders from "@/components/ClientProviders";
 import "./globals.css";
 import FirebaseAuthProvider from "./FirebaseAuthProvider";
 import SubscriptionProvider from "@/SubscriptionProvider";
+import {Toaster} from '@/components/ui/toaster'
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -35,6 +36,7 @@ export default function RootLayout({
                 <Header />
 
                 {children}
+                <Toaster/>
               </ThemeProvider>
             </SubscriptionProvider>
           </FirebaseAuthProvider>
