@@ -9,9 +9,8 @@ type props = {
 }
 function ChatPage({searchParams : {error}}: props) {
   return (
-    <div>
+    <div className='px-5 md:px-10'>
       {/* chat permission */}
-  <h2>Chats </h2>
       {/* chatlist */}
       <ChatList/>
     </div>

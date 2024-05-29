@@ -5,9 +5,11 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useSession } from "next-auth/react";
 import {useRouter}  from "next/navigation";
 import { UserAvatar } from "./UserAvatar";
+import {useLanguageStore} from "@/store/store"
 
 function ChatListRow({ chatId }: { chatId: string }) {
   const router = useRouter();
+  const language = useLanguageStore( )
 
   const { data: session } = useSession();
   const [messages, loading, error] = useCollectionData<Message>(
@@ -34,7 +36,7 @@ function ChatListRow({ chatId }: { chatId: string }) {
             [message?.user.name || session?.user.name].toString().split(" ")[0]}
         </p>
         <p className="text-gray-400 line-clamp-1">
-          {message?.translated?.["en"] || "Get the conversation started..."}
+          {message?.translated?.['en'] || "Get the conversation started..."}
         </p>
       </div>
       <div className="text-xs text-gray-400 text-right">
