@@ -11,7 +11,7 @@ function ChatPage({searchParams : {error}}: props) {
   return (
     <div>
       {/* chat permission */}
-
+  <h2>Chats </h2>
       {/* chatlist */}
       <ChatList/>
     </div>
