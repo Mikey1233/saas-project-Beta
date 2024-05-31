@@ -10,10 +10,12 @@ import { v4 as uuidv4 } from "uuid";
 import { serverTimestamp, setDoc } from "firebase/firestore";
 import { addChatRef } from "@/lib/converters/ChatMembers";
 import LoadingSpinner from "./LoadingSpinner";
+// import  {useRouter as Cur} from "next/router"
 
 // const {v4 : uuid} = require('uuid')
 function CreateChatButton({isLarge} : {isLarge? :boolean}) {
   const router = useRouter();
+  
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();

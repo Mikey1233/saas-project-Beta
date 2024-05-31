@@ -1,6 +1,4 @@
-import PricingCard from "@/components/PricingCard";
-import { redirect } from "next/navigation";
-import React from "react";
+import PricingCard from "@/components/PricingCard"
 
 function  PricingPage() {
   return (

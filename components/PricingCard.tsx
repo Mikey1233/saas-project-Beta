@@ -57,7 +57,7 @@ const ListItems = ({ feature }: { feature: String }) => {
 };
 function PricingCard({ redirect }: { redirect: boolean }) {
   return (
-    <div className="mx-auto grid max-w-md grid-cols-1 gap-8 lg:max-w-4xl lg:grid-cols-2">
+    <div className="sm:mx-auto grid max-w-md grid-cols-1 gap-8 lg:max-w-4xl lg:grid-cols-2 m-3">
       {tiers.map((arr) => (
         <div
           key={arr.id}

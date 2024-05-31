@@ -1,9 +1,9 @@
-import React from "react";
+
 
 function LoadingSpinner() {
   return (
     
-      <div class="loader"></div>
+      <div className="loader"></div>
     
   );
 }

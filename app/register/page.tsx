@@ -27,8 +27,8 @@ async function page() {
             ></ellipse>
             <defs>
               <radialGradient id="radial-gradient">
-                <stop stop-color="#7775D6"></stop>
-                <stop offset="1" stop-color="#E935C1"></stop>
+                <stop stopColor="#7775D6"></stop>
+                <stop offset="1" stopColor="#E935C1"></stop>
               </radialGradient>
             </defs>
           </svg>
