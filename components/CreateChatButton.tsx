@@ -7,15 +7,20 @@ import { useState } from "react";
 import { useSubscription } from "@/store/store";
 import { useToast } from "./ui/use-toast";
 import { v4 as uuidv4 } from "uuid";
-import { serverTimestamp, setDoc } from "firebase/firestore";
-import { addChatRef } from "@/lib/converters/ChatMembers";
+import { getDocs, serverTimestamp, setDoc } from "firebase/firestore";
+import {
+  addChatRef,
+  chatMembersCollectionGroupRef,
+} from "@/lib/converters/ChatMembers";
 import LoadingSpinner from "./LoadingSpinner";
+import { ToastAction } from "./ui/toast";
+
 // import  {useRouter as Cur} from "next/router"
 
 // const {v4 : uuid} = require('uuid')
-function CreateChatButton({isLarge} : {isLarge? :boolean}) {
+function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
   const router = useRouter();
-  
+
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
@@ -29,11 +34,34 @@ function CreateChatButton({isLarge} : {isLarge? :boolean}) {
       description: "Hold tight while we create a new chat...",
       duration: 3000,
     });
-    //checks for pro user and set limits then creating a new chat
+    const userId = session.user.id as string;
 
+    //checks for pro user and set limits then creating a new chat
+    const noOfChats = (
+      await getDocs(chatMembersCollectionGroupRef(userId))
+    ).docs.map((doc) => doc.data()).length;
+    const isPro =
+      subscription?.role === "pro" && subscription.status === "active";
+    if (!isPro && noOfChats >= 3) {
+      toast({
+        title: "free plan limit exceeded",
+        description:
+          "you've exceeded the limit of chats for the Free plan.Please upgrade to PRO to continua adding users to chats!",
+        variant: "destructive",
+        action: (
+          <ToastAction
+            altText="Upgrade"
+            onClick={() => router.push("/register")}
+          >
+            Upgrade to PRO
+          </ToastAction>
+        ),
+      });
+      setLoading(false)
+      return
+    }
     //........
     const chatId = uuidv4();
-    const userId = session.user.id as string;
     await setDoc(addChatRef(chatId, userId), {
       userId: userId!,
       email: session.user.email!,
@@ -51,7 +79,7 @@ function CreateChatButton({isLarge} : {isLarge? :boolean}) {
         router.push(`chat/${chatId}`);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         toast({
           title: "Error",
           description: "There was an error creating your chat",
@@ -62,14 +90,14 @@ function CreateChatButton({isLarge} : {isLarge? :boolean}) {
         setLoading(false);
       });
   };
-  if (isLarge){
-    return(
+  if (isLarge) {
+    return (
       <div>
-        <Button variant={'default'} onClick={createNewChat}>
-          {loading? <LoadingSpinner/> : "create a New Chat"}
+        <Button variant={"default"} onClick={createNewChat}>
+          {loading ? <LoadingSpinner /> : "create a New Chat"}
         </Button>
       </div>
-    )
+    );
   }
   return (
     <Button variant={"ghost"} onClick={createNewChat}>

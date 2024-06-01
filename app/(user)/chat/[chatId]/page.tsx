@@ -5,6 +5,7 @@ import { getDocs } from "firebase/firestore";
 import { sortedMessagesRef } from "@/lib/converters/Message";
 import ChatMessages from "@/components/ChatMessages";
 import ChatMemberShipBadge from "@/components/ChatMemberShipBadge";
+import AdminControls from "@/components/AdminControls";
 
 type Props = {
   params: {
@@ -19,6 +20,7 @@ async function ChatPage({ params: { chatId } }: Props) {
   return (
     <>
       {/* admin controls */}
+      <AdminControls chatId={chatId}/>
       {/* chat membersBadge */}
       <ChatMemberShipBadge chatId={chatId}/>
       {/* chat Messages */}
