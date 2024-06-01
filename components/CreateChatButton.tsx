@@ -40,8 +40,9 @@ function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
     const noOfChats = (
       await getDocs(chatMembersCollectionGroupRef(userId))
     ).docs.map((doc) => doc.data()).length;
-    const isPro =
-      subscription?.role === "pro" && subscription.status === "active";
+     
+      const isPro =  subscription?.role === "pro" && subscription.status === "active";
+    // console.log(isPro && (noOfChats >= 3))
     if (!isPro && noOfChats >= 3) {
       toast({
         title: "free plan limit exceeded",

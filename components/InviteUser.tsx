@@ -68,10 +68,10 @@ function InviteUser({ chatId }: { chatId: string }) {
     ).length;
 
     // Check if the user is about to exceed the PRO plan which is 3 chats
-    const isPro =
-      subscription?.role === "pro" && subscription.status === "active";
+    const isPro = subscription?.role === "pro" && subscription.status === "active";
+      
 
-    if (!isPro && noOfUsersInChat >= 2) {
+    if (!isPro && noOfUsersInChat >= 5) {
       toast({
         title: "Free plan limit exceeded",
         description:
