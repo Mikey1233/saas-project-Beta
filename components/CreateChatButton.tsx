@@ -15,13 +15,18 @@ import {
 import LoadingSpinner from "./LoadingSpinner";
 import { ToastAction } from "./ui/toast";
 
+
+
 // import  {useRouter as Cur} from "next/router"
 
 // const {v4 : uuid} = require('uuid')
 function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
   const router = useRouter();
+  
+  
 
   const { data: session } = useSession();
+  
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const subscription = useSubscription((state) => state.subscription);
@@ -77,7 +82,8 @@ function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
           description: "Your chat has been created",
           className: "bg-green text-white",
         });
-        router.push(`chat/${chatId}`);
+        
+        router.push(`/chat/${chatId}`);
       })
       .catch((err) => {
         console.log(err);
