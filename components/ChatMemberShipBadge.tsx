@@ -11,7 +11,7 @@ function ChatMemberShipBadge({chatId}:{chatId : string}) {
         chatMembersRef(chatId)
     )
     const adminId = useAdminId({chatId})
-// console.log(members , adminId)
+
 
     if(loading && !members) return <LoadingSpinner/>
     return (
